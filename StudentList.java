@@ -10,11 +10,7 @@ public class StudentList {
 			if (args[0].equals("a")) {
 				System.out.println("Loading data ...");
 				try {
-					BufferedReader s = new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream("students.txt")));
-					String r = s.readLine();
-					s.close();
+					String r = students();
 					String i[] = r.split(", ");
 					for (String j : i) {
 						System.out.println(j);
@@ -25,15 +21,10 @@ public class StudentList {
 			} else if (args[0].equals("r")) {
 				System.out.println("Loading data ...");
 				try {
-					BufferedReader s = new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream("students.txt")));
-					String r = s.readLine();
-					s.close();
-					System.out.println(r);
+					String r = students();
 					String i[] = r.split(",");
-					Random x = new Random();
-					int y = x.nextInt();
+					Double x = Math.random()*4;
+					int y = x.intValue();
 					System.out.println(i[y]);
 				} catch (Exception e) {
 				}
@@ -41,8 +32,7 @@ public class StudentList {
 			} else if (args[0].contains("+")) {
 				System.out.println("Loading data ...");
 				try {
-					BufferedWriter s = new BufferedWriter(
-							new FileWriter("students.txt", true));
+					BufferedWriter s = studentName();
 					String t = args[0].substring(1);
 					Date d = new Date();
 					String df = "dd/mm/yyyy-hh:mm:ss a";
@@ -54,14 +44,11 @@ public class StudentList {
 				}
 
 				System.out.println("Data Loaded.");
-			} else if (args[0].contains("?")) {
+			} 
+			else if (args[0].contains("?")) {
 				System.out.println("Loading data ...");
 				try {
-					BufferedReader s = new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream("students.txt")));
-					String r = s.readLine();
-					s.close();
+					String r = students();
 					String i[] = r.split(", ");
 					boolean done = false;
 					String t = args[0].substring(1);
@@ -74,15 +61,12 @@ public class StudentList {
 				} catch (Exception e) {
 				}
 				System.out.println("Data Loaded.");
-			} else if (args[0].contains("c")) {
+			} 
+			else if (args[0].contains("c")) {
 				System.out.println("Loading data ...");
 				try {
-					BufferedReader s = new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream("students.txt")));
-					String D = s.readLine();
-					s.close();
-					char a[] = D.toCharArray();
+					String r = students();
+					char a[] = r.toCharArray();
 					boolean in_word = false;
 					int count = 0;
 					for (char c : a) {
@@ -104,5 +88,20 @@ public class StudentList {
 				System.out.println("please put a valid argument and try again");
 			}
 		}
+	}
+
+	private static BufferedWriter studentName() throws IOException {
+		BufferedWriter s = new BufferedWriter(
+				new FileWriter("students.txt", true));
+		return s;
+	}
+
+	private static String students() throws FileNotFoundException, IOException {
+		BufferedReader s = new BufferedReader(
+				new InputStreamReader(
+						new FileInputStream("students.txt")));
+		String r = s.readLine();
+		s.close();
+		return r;
 	}
 }
