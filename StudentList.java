@@ -12,6 +12,7 @@ public class StudentList {
 					new InputStreamReader(
 							new FileInputStream("students.txt"))); 
 			String r = s.readLine();
+			s.close();
 			String i[] = r.split(",");			
 			for(String j : i) { System.out.println(j); }
 			} catch (Exception e){} 
