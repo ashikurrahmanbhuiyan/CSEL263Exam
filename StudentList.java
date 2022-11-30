@@ -14,7 +14,7 @@ public class StudentList {
 					for (String names : student) {
 						System.out.println(names);
 					}
-					
+
 				} catch (Exception e) {
 					System.out.println(constant.errorMessage);
 				}
@@ -24,13 +24,13 @@ public class StudentList {
 				try {
 					String student[] = students().split(constant.separator);
 					Random pick = new Random();
-					System.out.println(student[pick.nextInt(4)]);
+					System.out.println(student[pick.nextInt(student.length)]);
 				} catch (Exception e) {
 					System.out.println(constant.errorMessage);
 				}
 				System.out.println(constant.endMessage);
 			} else if (args[0].contains(constant.addCommand)) {
-				System.out.println(constant.waitingMessage);
+				System.out.println(constant.waitingMessage) ;
 				try {
 					String students = students();
 					File file = new File(constant.inputFileName);
@@ -40,7 +40,8 @@ public class StudentList {
 					BufferedWriter student = studentName();
 					student.write(students);
 					DateFormat dateFormat = new SimpleDateFormat(constant.timeFormat);
-					student.write(constant.separator + args[0].substring(1) + constant.updateMessage + dateFormat.format(new Date()));
+					student.write(constant.separator + args[0].substring(1) + constant.updateMessage
+							+ dateFormat.format(new Date()));
 					student.close();
 				} catch (Exception e) {
 					System.out.println(constant.errorMessage);
@@ -65,7 +66,7 @@ public class StudentList {
 				System.out.println(constant.waitingMessage);
 				try {
 					String student[] = students().split(constant.separator);
-					System.out.println(student.length + constant.foundMessage);
+					System.out.println(student.length + constant.countMessage);
 				} catch (Exception e) {
 					System.out.println(constant.errorMessage);
 				}

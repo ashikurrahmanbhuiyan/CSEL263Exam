@@ -1,6 +1,6 @@
 public class constant{
     public static String inputFileName = "students.txt";
-    public static String errorMessage = "use:  a|r|c|+word|?word";
+    public static String errorMessage = "use:  a or r  or c or +word or ?word";
     public static String displayCommand = "a";
     public static String addCommand = "+";
     public static String searchCommand = "?";
@@ -8,7 +8,7 @@ public class constant{
     public static String randomAccessCommand = "r";
     public static String waitingMessage = "Loading data ...";
     public static String endMessage = "Data Loaded.";
-    public static String separator = ",";
+    public static String separator = ", ";
     public static String timeFormat = "dd/mm/yyyy-hh:mm:ss a";
     public static String singleSpace = " ";
     public static char singleSpaceChar = ' ';
