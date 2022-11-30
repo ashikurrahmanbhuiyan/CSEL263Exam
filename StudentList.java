@@ -5,94 +5,87 @@ import java.util.*;
 public class StudentList {
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.out.println("Please put a argument and try again.");
+			System.out.println(constant.inputMessage);
 		} else {
-			if (args[0].equals(constant.comma)) {
-				System.out.println(constant.loading);
+			if (args[0].equals(constant.displayCommand)) {
+				System.out.println(constant.waitingMessage);
 				try {
-					String i[] = students().split(constant.separator);
-					for (String j : i) {
-						System.out.println(j);
+					String student[] = students().split(constant.separator);
+					for (String names : student) {
+						System.out.println(names);
 					}
 					
 				} catch (Exception e) {
+					System.out.println(constant.errorMessage);
 				}
 				System.out.println(constant.endMessage);
-			} else if (args[0].equals("r")) {
-				System.out.println(constant.loading);
+			} else if (args[0].equals(constant.randomAccessCommand)) {
+				System.out.println(constant.waitingMessage);
 				try {
-					String i[] = students().split(constant.separator);
-					Random x = new Random();
-					System.out.println(i[x.nextInt(4)]);
+					String student[] = students().split(constant.separator);
+					Random pick = new Random();
+					System.out.println(student[pick.nextInt(4)]);
 				} catch (Exception e) {
+					System.out.println(constant.errorMessage);
 				}
-				System.out.println("Data Loaded.");
-			} else if (args[0].contains("+")) {
-				System.out.println(constant.loading);
+				System.out.println(constant.endMessage);
+			} else if (args[0].contains(constant.addCommand)) {
+				System.out.println(constant.waitingMessage);
 				try {
-					String i = students();
-					File file = new File(constant.textFile);
+					String students = students();
+					File file = new File(constant.inputFileName);
 					file.delete();
-					File file1 = new File(constant.textFile);
+					File file1 = new File(constant.inputFileName);
 					file1.createNewFile();
-					BufferedWriter s = studentName();
-					s.write(i);
-					DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy-hh:mm:ss a");
-					s.write(", " + args[0].substring(1) + "\nList last updated on " + dateFormat.format(new Date()));
-					s.close();
+					BufferedWriter student = studentName();
+					student.write(students);
+					DateFormat dateFormat = new SimpleDateFormat(constant.timeFormat);
+					student.write(constant.separator + args[0].substring(1) + constant.updateMessage + dateFormat.format(new Date()));
+					student.close();
 				} catch (Exception e) {
+					System.out.println(constant.errorMessage);
 				}
 
 				System.out.println(constant.endMessage);
-			} else if (args[0].contains("?")) {
-				System.out.println(constant.loading);
+			} else if (args[0].contains(constant.searchCommand)) {
+				System.out.println(constant.waitingMessage);
 				try {
-					String i[] = students().split(constant.separator);
-					for (int idx = 0; idx < i.length; idx++) {
-						if (i[idx].equals(args[0].substring(1))) {
-							System.out.println("We found it!");
+					String student[] = students().split(constant.separator);
+					for (int idx = 0; idx < student.length; idx++) {
+						if (student[idx].equals(args[0].substring(1))) {
+							System.out.println(constant.foundMessage);
 							break;
 						}
 					}
 				} catch (Exception e) {
+					System.out.println(constant.errorMessage);
 				}
 				System.out.println(constant.endMessage);
-			} else if (args[0].contains("c")) {
-				System.out.println(constant.loading);
+			} else if (args[0].contains(constant.countCommand)) {
+				System.out.println(constant.waitingMessage);
 				try {
-					char a[] = students().toCharArray();
-					boolean in_word = false;
-					int count = 0;
-					for (char c : a) {
-						if (c == ' ') {
-							if (in_word == false) {
-								count++;
-								in_word = true;
-							} else {
-								in_word = false;
-							}
-						}
-					}
-					System.out.println(count + " word(s) found " + a.length);
+					String student[] = students().split(constant.separator);
+					System.out.println(student.length + constant.foundMessage);
 				} catch (Exception e) {
+					System.out.println(constant.errorMessage);
 				}
 				System.out.println(constant.endMessage);
 			} else {
-				System.out.println("please put a valid argument and try again");
+				System.out.println(constant.errorMessage);
 			}
 		}
 	}
 
 	private static BufferedWriter studentName() throws IOException {
 		BufferedWriter writer = new BufferedWriter(
-				new FileWriter("students.txt", true));
+				new FileWriter(constant.inputFileName, true));
 		return writer;
 	}
 
 	private static String students() throws FileNotFoundException, IOException {
 		BufferedReader reader = new BufferedReader(
 				new InputStreamReader(
-						new FileInputStream("students.txt")));
+						new FileInputStream(constant.inputFileName)));
 		String names = reader.readLine();
 		reader.close();
 		return names;

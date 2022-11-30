@@ -1,6 +1,6 @@
 public class constant{
     public static String inputFileName = "students.txt";
-    public static String errorMessage = "Usage:  a|r|c|+word|?word";
+    public static String errorMessage = "use:  a|r|c|+word|?word";
     public static String displayCommand = "a";
     public static String addCommand = "+";
     public static String searchCommand = "?";
@@ -15,4 +15,5 @@ public class constant{
     public static String updateMessage = "\nList last updated on ";
     public static String foundMessage = "We found it!";
     public static String countMessage = " word(s) found ";
+    public static String inputMessage ="Please put a argument and try again.";
 }
